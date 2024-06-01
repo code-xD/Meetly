@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet id="firstChangeSet" author="admin">
+    </changeSet>
+
+    <changeSet id="createOperatorTable" author="Shivansh Anand">
+        <createTable tableName="mtly_operator">
+            <column name="id" type="integer" autoIncrement="true" >
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_mtly_operator"/>
+            </column>
+            <column name="created_on" type="integer" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="updated_on" type="integer"/>
+            <column name="name" type="VARCHAR(500)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <changeSet id="createAppointment" author="Shivansh Anand">
+        <createTable tableName="mtly_appointment">
+            <column name="id" type="integer" autoIncrement="true" >
+                <constraints nullable="false" primaryKey="true" primaryKeyName="pk_mtly_appointment"/>
+            </column>
+            <column name="created_on" type="integer" defaultValueComputed="CURRENT_TIMESTAMP"/>
+            <column name="updated_on" type="integer"/>
+            <column name="code" type="VARCHAR(500)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="start_time" type="integer"/>
+            <column name="end_time" type="integer"/>
+            <column name="operator_id" type="integer">
+                <constraints nullable="false" foreignKeyName="fk_operator_id" references="mtly_operator(id)"/>
+            </column>
+            <column name="is_active" type="boolean" defaultValueBoolean="true"/>
+        </createTable>
+    </changeSet>
+
+</databaseChangeLog>

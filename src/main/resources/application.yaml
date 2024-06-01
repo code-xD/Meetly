@@ -1,0 +1,31 @@
+server:
+  port: 3000
+  error:
+    include-message: always
+    include-exception: false
+    include-stacktrace: never
+
+spring:
+  application:
+    name: meetly
+
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    show-sql: true
+
+  liquibase:
+    enabled: false
+    change-log: classpath:db/changelog/changelog.xml
+
+  datasource:
+    url: jdbc:sqlite:primary.db
+    driver-class-name: org.sqlite.JDBC
+    username: admin
+    password: password
+
+logging:
+  level:
+    org:springframework:web: INFO
+    org.springframework.orm.jpa: INFO
+    org.springframework.transaction: INFO
+    root: INFO
